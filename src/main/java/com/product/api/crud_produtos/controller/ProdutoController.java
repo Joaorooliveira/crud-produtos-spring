@@ -39,6 +39,22 @@ public class ProdutoController {
                 .map(produto -> ResponseEntity.ok(ProdutoResponseDTO.fromEntity(produto))) // converte entity para DTO
                 .orElse(ResponseEntity.notFound().build()); // se não achar → 404
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ProdutoResponseDTO> atualizarProduto(
+            @PathVariable UUID id,
+            @RequestBody @Valid ProdutoRequestDTO dto) {
+
+        Produto produtoAtualizado = service.atualizarProduto(
+                id,
+                dto.nome(),
+                dto.preco(),
+                dto.quantidade()
+        );
+
+        return ResponseEntity.ok(ProdutoResponseDTO.fromEntity(produtoAtualizado));
+    }
+
 }
 
 
