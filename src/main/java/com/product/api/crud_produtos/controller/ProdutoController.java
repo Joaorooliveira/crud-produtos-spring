@@ -7,6 +7,7 @@ import com.product.api.crud_produtos.service.ProdutoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -21,26 +22,28 @@ public class ProdutoController {
 
     private final ProdutoService  service;
 
-    @PostMapping
-    public ResponseEntity<Void> criarProduto(@RequestBody @Valid ProdutoRequestDTO dto){
-        service.criarProduto(dto.toEntity());
-        return ResponseEntity.created(URI.create("/api/produtos")).build();
+    @PostMapping("/create")
+    @Transactional
+    public ResponseEntity<Produto> criarProduto(@RequestBody @Valid ProdutoRequestDTO dto){
+        Produto produto = service.criarProduto(dto.toEntity());
+        return ResponseEntity.ok(produto);
     }
 
-    @GetMapping
+    @GetMapping("/list")
     public List<ProdutoResponseDTO> listarProdutos() {
 
         return service.listarProdutos();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/list/{id}")
     public ResponseEntity<ProdutoResponseDTO> buscarPorId(@PathVariable UUID id){
         return service.buscarPorId(id)
                 .map(produto -> ResponseEntity.ok(ProdutoResponseDTO.fromEntity(produto))) // converte entity para DTO
                 .orElse(ResponseEntity.notFound().build()); // se não achar → 404
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/edit/{id}")
+    @Transactional
     public ResponseEntity<ProdutoResponseDTO> atualizarProduto(
             @PathVariable UUID id,
             @RequestBody @Valid ProdutoRequestDTO dto) {
