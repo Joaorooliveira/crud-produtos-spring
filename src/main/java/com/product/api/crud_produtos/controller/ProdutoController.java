@@ -23,7 +23,6 @@ public class ProdutoController {
     private final ProdutoService  service;
 
     @PostMapping("/create")
-    @Transactional
     public ResponseEntity<Produto> criarProduto(@RequestBody @Valid ProdutoRequestDTO dto){
         Produto produto = service.criarProduto(dto.toEntity());
         return ResponseEntity.ok(produto);
@@ -43,7 +42,6 @@ public class ProdutoController {
     }
 
     @PutMapping("/edit/{id}")
-    @Transactional
     public ResponseEntity<ProdutoResponseDTO> atualizarProduto(
             @PathVariable UUID id,
             @RequestBody @Valid ProdutoRequestDTO dto) {
@@ -56,6 +54,12 @@ public class ProdutoController {
         );
 
         return ResponseEntity.ok(ProdutoResponseDTO.fromEntity(produtoAtualizado));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deletarProduto(@PathVariable UUID id){
+        service.deletarProduto(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
