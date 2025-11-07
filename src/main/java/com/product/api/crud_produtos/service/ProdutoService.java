@@ -18,9 +18,10 @@ public class ProdutoService {
     private ProdutosRepository repository;
 
 
-    public void criarProduto(Produto produto){
+    public Produto criarProduto(Produto produto){
 
         repository.saveAndFlush(produto);
+        return produto;
     }
 
     public List<ProdutoResponseDTO> listarProdutos() {
