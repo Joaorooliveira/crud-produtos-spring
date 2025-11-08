@@ -1,5 +1,6 @@
 package com.product.api.crud_produtos.controller;
 
+import com.product.api.crud_produtos.dto.ProdutoAtualizarRequestDto;
 import com.product.api.crud_produtos.dto.ProdutoRequestDTO;
 import com.product.api.crud_produtos.dto.ProdutoResponseDTO;
 import com.product.api.crud_produtos.entities.Produto;
@@ -41,19 +42,10 @@ public class ProdutoController {
                 .orElse(ResponseEntity.notFound().build()); // se não achar → 404
     }
 
-    @PutMapping("/edit/{id}")
-    public ResponseEntity<ProdutoResponseDTO> atualizarProduto(
-            @PathVariable UUID id,
-            @RequestBody @Valid ProdutoRequestDTO dto) {
-
-        Produto produtoAtualizado = service.atualizarProduto(
-                id,
-                dto.nome(),
-                dto.preco(),
-                dto.quantidade()
-        );
-
-        return ResponseEntity.ok(ProdutoResponseDTO.fromEntity(produtoAtualizado));
+    @PatchMapping("/edit/{id}")
+    public ResponseEntity<Produto> atualizarProduto(@PathVariable UUID id, @RequestBody
+     ProdutoAtualizarRequestDto dto) {
+        return ResponseEntity.ok(service.atualizarProduto(id,dto));
     }
 
     @DeleteMapping("/delete/{id}")
