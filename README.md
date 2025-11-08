@@ -72,6 +72,7 @@ A rota base para todos os endpoints é `/api/produtos`.
   "preco": 199.99,
   "quantidade": 10
 }
+```
 
 **`ProdutoAtualizarRequestDto` (para Atualizar) Envie apenas os campos que deseja alterar.**
 ```json
@@ -80,6 +81,7 @@ A rota base para todos os endpoints é `/api/produtos`.
   "preco": 249.50,
   "quantidade": 15
 }
+```
 
 📁 Estrutura do Projeto (Simplificada)
 
