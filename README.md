@@ -84,7 +84,7 @@ A rota base para todos os endpoints é `/api/produtos`.
 ```
 
 📁 Estrutura do Projeto (Simplificada)
-
+```
 .
 └── src
     └── main
@@ -95,3 +95,4 @@ A rota base para todos os endpoints é `/api/produtos`.
                 ├── entities    # Entidades do Banco (Produto)
                 ├── repository  # Interface com o Banco (JPA)
                 └── service     # Camada de Regras de Negócio
+```
