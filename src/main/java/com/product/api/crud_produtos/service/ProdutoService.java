@@ -1,5 +1,7 @@
 package com.product.api.crud_produtos.service;
 
+import com.product.api.crud_produtos.dto.ProdutoAtualizarRequestDto;
+import com.product.api.crud_produtos.dto.ProdutoRequestDTO;
 import com.product.api.crud_produtos.dto.ProdutoResponseDTO;
 import com.product.api.crud_produtos.entities.Produto;
 import com.product.api.crud_produtos.repository.ProdutosRepository;
@@ -42,15 +44,16 @@ public class ProdutoService {
     }
 
     @Transactional
-    public Produto atualizarProduto(UUID id, String nome, float preco, Integer quantidade) {
-        return repository.findById(id)
-                .map(produto -> {
-                    produto.setNome(nome);
-                    produto.setPreco(preco);
-                    produto.setQuantidade(quantidade);
-                    return repository.save(produto);
-                })
-                .orElseThrow(() -> new RuntimeException("Produto não encontrado com id: " + id));
+    public Produto atualizarProduto(UUID id, ProdutoAtualizarRequestDto dto) {
+        var produtoEntity = repository.findById(id).orElseThrow(()-> new RuntimeException("Produto nao encontrado"));
+        Produto produto = Produto.builder()
+                .id(produtoEntity.getId())
+                .nome(dto.nome()!=null?dto.nome():produtoEntity.getNome())
+                .preco(dto.preco()!=null?dto.preco():produtoEntity.getPreco())
+                .quantidade(dto.quantidade()!=null?dto.quantidade():produtoEntity.getQuantidade())
+                .build();
+        return repository.saveAndFlush(produto);
+
     }
 
     @Transactional
