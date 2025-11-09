@@ -1,4 +1,4 @@
-package com.product.api.crud_produtos.entities;
+package com.product.api.crud_produtos.entity;
 
 
 import jakarta.persistence.*;

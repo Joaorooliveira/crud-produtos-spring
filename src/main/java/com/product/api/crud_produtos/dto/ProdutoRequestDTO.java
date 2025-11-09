@@ -1,6 +1,6 @@
 package com.product.api.crud_produtos.dto;
 
-import com.product.api.crud_produtos.entities.Produto;
+import com.product.api.crud_produtos.entity.Produto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 

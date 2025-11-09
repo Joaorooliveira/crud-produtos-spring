@@ -2,7 +2,7 @@ package com.product.api.crud_produtos.service;
 
 import com.product.api.crud_produtos.dto.ProdutoAtualizarRequestDto;
 import com.product.api.crud_produtos.dto.ProdutoResponseDTO;
-import com.product.api.crud_produtos.entities.Produto;
+import com.product.api.crud_produtos.entity.Produto;
 import com.product.api.crud_produtos.repository.ProdutosRepository;
 
 import jakarta.persistence.EntityNotFoundException;
