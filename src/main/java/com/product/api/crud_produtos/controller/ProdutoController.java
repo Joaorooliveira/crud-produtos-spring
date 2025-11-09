@@ -23,32 +23,32 @@ public class ProdutoController {
 
     private final ProdutoService  service;
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<Produto> criarProduto(@RequestBody @Valid ProdutoRequestDTO dto){
         Produto produto = service.criarProduto(dto.toEntity());
         return ResponseEntity.ok(produto);
     }
 
-    @GetMapping("/list")
+    @GetMapping
     public List<ProdutoResponseDTO> listarProdutos() {
 
         return service.listarProdutos();
     }
 
-    @GetMapping("/list/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<ProdutoResponseDTO> buscarPorId(@PathVariable UUID id){
         return service.buscarPorId(id)
                 .map(produto -> ResponseEntity.ok(ProdutoResponseDTO.fromEntity(produto))) // converte entity para DTO
                 .orElse(ResponseEntity.notFound().build()); // se não achar → 404
     }
 
-    @PatchMapping("/edit/{id}")
+    @PatchMapping("{id}")
     public ResponseEntity<Produto> atualizarProduto(@PathVariable UUID id, @RequestBody
      ProdutoAtualizarRequestDto dto) {
         return ResponseEntity.ok(service.atualizarProduto(id,dto));
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<Void> deletarProduto(@PathVariable UUID id){
         service.deletarProduto(id);
         return ResponseEntity.noContent().build();
