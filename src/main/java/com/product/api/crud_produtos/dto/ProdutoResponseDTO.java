@@ -8,6 +8,7 @@ public record ProdutoResponseDTO(
         float preco,
         int quantidade
 ) {
+
     public static ProdutoResponseDTO fromEntity(Produto produto) {
         return new ProdutoResponseDTO(
                 produto.getNome(),

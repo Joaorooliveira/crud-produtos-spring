@@ -7,10 +7,13 @@ import com.product.api.crud_produtos.repository.ProdutosRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -27,15 +30,18 @@ public class ProdutoService {
         return produto;
     }
 
-    public List<ProdutoResponseDTO> listarProdutos() {
-        List<Produto> produtos = repository.findAll();
-        return produtos.stream()
-                .map(produto -> new ProdutoResponseDTO(
-                        produto.getNome(),
-                        produto.getPreco(),
-                        produto.getQuantidade()
-                ))
-                .toList();
+    public Page<ProdutoResponseDTO> listarProdutos(Pageable  pageable) {
+        Page<Produto> listaPaginada= repository.findAll(pageable);
+        Page<ProdutoResponseDTO> paginaDeDTOs = listaPaginada.map(produto -> ProdutoResponseDTO.fromEntity(produto));
+        return paginaDeDTOs;
+        //return repository.findAll(pageable);
+//        return produtos.stream()
+//                .map(produto -> new ProdutoResponseDTO(
+//                        produto.getNome(),
+//                        produto.getPreco(),
+//                        produto.getQuantidade()
+//                ))
+//                .toList();
     }
 
     public Optional<Produto> buscarPorId(UUID id) {
