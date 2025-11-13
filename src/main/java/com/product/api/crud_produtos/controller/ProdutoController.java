@@ -4,9 +4,12 @@ import com.product.api.crud_produtos.dto.ProdutoAtualizarRequestDto;
 import com.product.api.crud_produtos.dto.ProdutoRequestDTO;
 import com.product.api.crud_produtos.dto.ProdutoResponseDTO;
 import com.product.api.crud_produtos.entity.Produto;
+import com.product.api.crud_produtos.repository.ProdutosRepository;
 import com.product.api.crud_produtos.service.ProdutoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +25,6 @@ public class ProdutoController {
 
 
     private final ProdutoService  service;
-
     @PostMapping
     public ResponseEntity<Produto> criarProduto(@RequestBody @Valid ProdutoRequestDTO dto){
         Produto produto = service.criarProduto(dto.toEntity());
@@ -30,9 +32,8 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public List<ProdutoResponseDTO> listarProdutos() {
-
-        return service.listarProdutos();
+    public Page<ProdutoResponseDTO> listarProdutos(Pageable pageable) {
+         return service.listarProdutos(pageable);
     }
 
     @GetMapping("{id}")
