@@ -13,9 +13,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -25,10 +25,16 @@ public class ProdutoController {
 
 
     private final ProdutoService  service;
+
     @PostMapping
-    public ResponseEntity<Produto> criarProduto(@RequestBody @Valid ProdutoRequestDTO dto){
-        Produto produto = service.criarProduto(dto.toEntity());
-        return ResponseEntity.ok(produto);
+    public ResponseEntity<ProdutoResponseDTO> criarProduto(@RequestBody @Valid ProdutoRequestDTO dto,
+                                                           UriComponentsBuilder builder) {
+        var produto = service.criarProduto(dto);
+        var uri = builder
+                .path("/produtos/{id}")
+                .buildAndExpand(produto.id())
+                .toUri();
+        return ResponseEntity.created(uri).body(produto);
     }
 
     @GetMapping
