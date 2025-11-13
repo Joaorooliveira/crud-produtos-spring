@@ -35,8 +35,7 @@ public class ProdutoService {
 
     public Page<ProdutoResponseDTO> listarProdutos(Pageable  pageable) {
         Page<Produto> listaPaginada= repository.findAll(pageable);
-        Page<ProdutoResponseDTO> paginaDeDTOs = listaPaginada.map(produto -> ProdutoResponseDTO.fromEntity(produto));
-        return paginaDeDTOs;
+        return listaPaginada.map(ProdutoResponseDTO::fromEntity);
     }
 
     public Optional<Produto> buscarPorId(UUID id) {
