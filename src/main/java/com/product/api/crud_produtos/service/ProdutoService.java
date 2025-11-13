@@ -1,47 +1,42 @@
 package com.product.api.crud_produtos.service;
 
 import com.product.api.crud_produtos.dto.ProdutoAtualizarRequestDto;
+import com.product.api.crud_produtos.dto.ProdutoRequestDTO;
 import com.product.api.crud_produtos.dto.ProdutoResponseDTO;
 import com.product.api.crud_produtos.entity.Produto;
 import com.product.api.crud_produtos.repository.ProdutosRepository;
 
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Objects;
+
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class ProdutoService {
 
-    @Autowired
-    private ProdutosRepository repository;
+
+    private final ProdutosRepository repository;
+
+    public ProdutoService(ProdutosRepository repository) {
+        this.repository = repository;
+    }
 
     @Transactional
-    public Produto criarProduto(Produto produto){
+    public ProdutoResponseDTO criarProduto(ProdutoRequestDTO dto){
 
-        repository.saveAndFlush(produto);
-        return produto;
+        var produto = repository.saveAndFlush(dto.toEntity());
+        return ProdutoResponseDTO.fromEntity(produto);
     }
 
     public Page<ProdutoResponseDTO> listarProdutos(Pageable  pageable) {
         Page<Produto> listaPaginada= repository.findAll(pageable);
         Page<ProdutoResponseDTO> paginaDeDTOs = listaPaginada.map(produto -> ProdutoResponseDTO.fromEntity(produto));
         return paginaDeDTOs;
-        //return repository.findAll(pageable);
-//        return produtos.stream()
-//                .map(produto -> new ProdutoResponseDTO(
-//                        produto.getNome(),
-//                        produto.getPreco(),
-//                        produto.getQuantidade()
-//                ))
-//                .toList();
     }
 
     public Optional<Produto> buscarPorId(UUID id) {
