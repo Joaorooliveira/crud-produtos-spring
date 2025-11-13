@@ -20,7 +20,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/produtos")// rota base
-@RequiredArgsConstructor // Dependencia Lombok
+@RequiredArgsConstructor
 public class ProdutoController {
 
 
