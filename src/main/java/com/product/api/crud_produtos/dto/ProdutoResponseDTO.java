@@ -2,8 +2,11 @@ package com.product.api.crud_produtos.dto;
 
 import com.product.api.crud_produtos.entity.Produto;
 
+import java.util.UUID;
+
 
 public record ProdutoResponseDTO(
+        UUID id,
         String nome,
         float preco,
         int quantidade
@@ -11,6 +14,7 @@ public record ProdutoResponseDTO(
 
     public static ProdutoResponseDTO fromEntity(Produto produto) {
         return new ProdutoResponseDTO(
+                produto.getId(),
                 produto.getNome(),
                 produto.getPreco(),
                 produto.getQuantidade()
