@@ -4,7 +4,6 @@ import com.product.api.crud_produtos.dto.ProdutoAtualizarRequestDto;
 import com.product.api.crud_produtos.dto.ProdutoRequestDTO;
 import com.product.api.crud_produtos.dto.ProdutoResponseDTO;
 import com.product.api.crud_produtos.entity.Produto;
-import com.product.api.crud_produtos.repository.ProdutosRepository;
 import com.product.api.crud_produtos.service.ProdutoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -50,7 +49,7 @@ public class ProdutoController {
     }
 
     @PatchMapping("{id}")
-    public ResponseEntity<Produto> atualizarProduto(@PathVariable UUID id, @RequestBody
+    public ResponseEntity<ProdutoResponseDTO> atualizarProduto(@PathVariable UUID id, @RequestBody
      ProdutoAtualizarRequestDto dto) {
         return ResponseEntity.ok(service.atualizarProduto(id,dto));
     }
