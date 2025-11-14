@@ -43,7 +43,7 @@ public class ProdutoService {
     }
 
     @Transactional
-    public Produto atualizarProduto(UUID id, ProdutoAtualizarRequestDto dto) {
+    public ProdutoResponseDTO atualizarProduto(UUID id, ProdutoAtualizarRequestDto dto) {
         var produtoEntity = repository.findById(id).orElseThrow(()-> new RuntimeException("Produto nao encontrado"));
         Produto produto = Produto.builder()
                 .id(produtoEntity.getId())
@@ -51,7 +51,8 @@ public class ProdutoService {
                 .preco(dto.preco()!=null?dto.preco():produtoEntity.getPreco())
                 .quantidade(dto.quantidade()!=null?dto.quantidade():produtoEntity.getQuantidade())
                 .build();
-        return repository.saveAndFlush(produto);
+        repository.saveAndFlush(produto);
+        return ProdutoResponseDTO.fromEntity(produto);
 
     }
 
