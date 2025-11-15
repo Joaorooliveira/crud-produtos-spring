@@ -44,7 +44,8 @@ public class ProdutoService {
 
     @Transactional
     public ProdutoResponseDTO atualizarProduto(UUID id, ProdutoAtualizarRequestDto dto) {
-        var produtoEntity = repository.findById(id).orElseThrow(()-> new EntityNotFoundException("Produto nao encontrado"));
+        var produtoEntity = repository.findById(id).orElseThrow(()-> new EntityNotFoundException("Produto nao encontrado com o ID: "
+                +id));
         Produto produto = Produto.builder()
                 .id(produtoEntity.getId())
                 .nome(dto.nome()!=null?dto.nome():produtoEntity.getNome())
