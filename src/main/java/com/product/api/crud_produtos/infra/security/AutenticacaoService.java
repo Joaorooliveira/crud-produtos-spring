@@ -1,4 +1,4 @@
-package com.product.api.crud_produtos.service;
+package com.product.api.crud_produtos.infra.security;
 
 import com.product.api.crud_produtos.repository.UsuarioRepository;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,8 +14,6 @@ public class AutenticacaoService implements UserDetailsService {
     public AutenticacaoService(UsuarioRepository repository) {
         this.repository = repository;
     }
-
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return repository.findByLogin(username);
