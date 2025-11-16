@@ -54,7 +54,6 @@ public class ProdutoService {
                 .build();
         repository.saveAndFlush(produto);
         return ProdutoResponseDTO.fromEntity(produto);
-
     }
 
     @Transactional
