@@ -24,7 +24,7 @@ public class TokenService {
         try {
             var algoritmo = Algorithm.HMAC256(secret);
             return  JWT.create()
-                    .withIssuer("API Voll.med")
+                    .withIssuer("API Crud Produtos")
                     .withSubject(usuario.getLogin())
                     .withExpiresAt(dataExpiracao())
                     .sign(algoritmo);
