@@ -1,3 +1,4 @@
+
 INSERT INTO PRODUTOS (id, nome, preco, quantidade) VALUES (RANDOM_UUID(), 'Notebook Gamer Pro', 7500.00, 10);
 INSERT INTO PRODUTOS (id, nome, preco, quantidade) VALUES (RANDOM_UUID(), 'Mouse Óptico Sem Fio', 120.50, 50);
 INSERT INTO PRODUTOS (id, nome, preco, quantidade) VALUES (RANDOM_UUID(), 'Teclado Mecânico RGB', 350.00, 30);
@@ -18,3 +19,5 @@ INSERT INTO PRODUTOS (id, nome, preco, quantidade) VALUES (RANDOM_UUID(), 'Smart
 INSERT INTO PRODUTOS (id, nome, preco, quantidade) VALUES (RANDOM_UUID(), 'Smartwatch Pro 5', 1300.00, 15);
 INSERT INTO PRODUTOS (id, nome, preco, quantidade) VALUES (RANDOM_UUID(), 'Caixa de Som Bluetooth', 280.00, 40);
 INSERT INTO PRODUTOS (id, nome, preco, quantidade) VALUES (RANDOM_UUID(), 'Tablet 10 Polegadas', 950.00, 10);
+
+INSERT INTO USUARIOS (login, senha) VALUES ('joao.victor@proton.me', '$2a$12$LmVAr6uqaLks5XZy5l04M.ShClWsEBqr/8SbFbcg7JFFOi8P26M4a');

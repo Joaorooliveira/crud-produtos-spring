@@ -1,4 +1,4 @@
-package com.product.api.crud_produtos.dto;
+package com.product.api.crud_produtos.dto.response;
 
 import com.product.api.crud_produtos.entity.Produto;
 
