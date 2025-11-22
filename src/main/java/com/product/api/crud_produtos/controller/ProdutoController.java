@@ -1,8 +1,8 @@
 package com.product.api.crud_produtos.controller;
 
-import com.product.api.crud_produtos.dto.ProdutoAtualizarRequestDto;
-import com.product.api.crud_produtos.dto.ProdutoRequestDTO;
-import com.product.api.crud_produtos.dto.ProdutoResponseDTO;
+import com.product.api.crud_produtos.dto.request.ProdutoAtualizarRequestDto;
+import com.product.api.crud_produtos.dto.request.ProdutoRequestDTO;
+import com.product.api.crud_produtos.dto.response.ProdutoResponseDTO;
 import com.product.api.crud_produtos.service.ProdutoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/produtos")// rota base
+@RequestMapping("/api/produtos")
 @RequiredArgsConstructor
 public class ProdutoController {
 
