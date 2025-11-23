@@ -80,6 +80,7 @@ A rota base para todos os endpoints é `/api/produtos`.
 {
   "preco": 249.50,
   "quantidade": 15
+
 }
 ```
 
