@@ -36,6 +36,9 @@ public class SecurityFilter extends OncePerRequestFilter {
                 var authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
+            else{
+                System.out.println("ALERTA: Token válido, mas usuário não encontrado no banco: " + subject);
+            }
         }
 
         filterChain.doFilter(request, response);
