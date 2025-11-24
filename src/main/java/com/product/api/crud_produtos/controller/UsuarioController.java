@@ -1,26 +1,31 @@
 package com.product.api.crud_produtos.controller;
 
-import com.product.api.crud_produtos.entity.Usuario;
-import com.product.api.crud_produtos.repository.UsuarioRepository;
+import com.product.api.crud_produtos.dto.response.UsuarioResponseDTO;
+import com.product.api.crud_produtos.service.UsuarioService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @RequestMapping("api/usuarios")
 public class UsuarioController {
 
-    private final UsuarioRepository repository;
-
-    public UsuarioController(UsuarioRepository usuarioRepository, UsuarioRepository repository) {
-        this.repository = repository;
+    private final UsuarioService service;
+    public UsuarioController(UsuarioService service) {
+        this.service = service;
     }
 
-    @PostMapping
-    public ResponseEntity<Usuario> criarUsuario(@RequestBody Usuario usuario) {
+    @GetMapping
+    public Page<UsuarioResponseDTO> listarUsuarios (Pageable pageable) {
+        return service.listarUsuarios(pageable);
+    }
 
-        return ResponseEntity.ok(repository.saveAndFlush(usuario));
+    @GetMapping("{id}")
+    public ResponseEntity<UsuarioResponseDTO> buscarUsuarioPorId (@PathVariable Long id) {
+        return service.buscarUsuarioPorId(id)
+                .map(usuario -> ResponseEntity.ok(UsuarioResponseDTO.fromEntity(usuario)))
+                .orElse(ResponseEntity.notFound().build());
     }
 }
