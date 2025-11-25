@@ -35,4 +35,10 @@ public class UsuarioController {
                                                                      @RequestBody UsuarioAtualizarRequestDTO dto) {
         return ResponseEntity.ok(service.atualizarUsuarioPorId(id, dto));
     }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity excluirUsuarioPorId(@PathVariable Long id) {
+        service.excluirUsuarioPorID(id);
+        return ResponseEntity.noContent().build();
+    }
 }
