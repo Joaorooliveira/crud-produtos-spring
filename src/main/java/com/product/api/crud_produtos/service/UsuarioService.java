@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -34,6 +35,7 @@ public class UsuarioService {
         return repository.findById(id);
     }
 
+    @Transactional
     public UsuarioResponseDTO atualizarUsuarioPorId  (Long id, UsuarioAtualizarRequestDTO dto ) {
         var UsuarioEntity = buscarUsuarioPorId(id).orElseThrow(()-> new EntityNotFoundException("Usuario nao encontrado " +
                 "com o ID:"+id));
@@ -45,6 +47,14 @@ public class UsuarioService {
                 .build();
         repository.saveAndFlush(usuario);
         return UsuarioResponseDTO.fromEntity(usuario);
+    }
+
+    @Transactional
+    public void excluirUsuarioPorID (Long id) {
+        var UsuarioEntity = buscarUsuarioPorId(id).orElseThrow(()-> new EntityNotFoundException("Usuario nao encontrado " +
+                "com o ID:"+id));
+
+        repository.delete(UsuarioEntity);
     }
 
 }
