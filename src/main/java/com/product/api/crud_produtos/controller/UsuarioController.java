@@ -1,5 +1,6 @@
 package com.product.api.crud_produtos.controller;
 
+import com.product.api.crud_produtos.dto.request.UsuarioAtualizarRequestDTO;
 import com.product.api.crud_produtos.dto.response.UsuarioResponseDTO;
 import com.product.api.crud_produtos.service.UsuarioService;
 import org.springframework.data.domain.Page;
@@ -27,5 +28,11 @@ public class UsuarioController {
         return service.buscarUsuarioPorId(id)
                 .map(usuario -> ResponseEntity.ok(UsuarioResponseDTO.fromEntity(usuario)))
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PatchMapping("{id}")
+    public ResponseEntity<UsuarioResponseDTO> atualizarUsuarioPorId (@RequestParam Long id,
+                                                                     @RequestBody UsuarioAtualizarRequestDTO dto) {
+        return ResponseEntity.ok(service.atualizarUsuarioPorId(id, dto));
     }
 }
