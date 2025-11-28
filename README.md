@@ -3,6 +3,7 @@
 ![Badge de Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)
 ![Badge de Licença](https://img.shields.io/badge/license-MIT-blue)
 
+
 Uma API RESTful desenvolvida em Java e Spring Boot para realizar as quatro operações básicas (CRUD - Create, Read, Update, Delete) em uma entidade `Produto`.
 
 Este projeto demonstra o uso de boas práticas de desenvolvimento de APIs, incluindo:
