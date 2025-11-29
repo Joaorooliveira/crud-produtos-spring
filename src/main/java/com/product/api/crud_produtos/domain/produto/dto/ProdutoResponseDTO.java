@@ -1,6 +1,6 @@
-package com.product.api.crud_produtos.dto.response;
+package com.product.api.crud_produtos.domain.produto.dto;
 
-import com.product.api.crud_produtos.entity.Produto;
+import com.product.api.crud_produtos.domain.produto.Produto;
 
 import java.util.UUID;
 

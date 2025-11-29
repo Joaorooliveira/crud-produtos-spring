@@ -1,6 +1,6 @@
-package com.product.api.crud_produtos.dto.response;
+package com.product.api.crud_produtos.domain.usuario.dto;
 
-import com.product.api.crud_produtos.entity.Usuario;
+import com.product.api.crud_produtos.domain.usuario.Usuario;
 
 public record UsuarioResponseDTO(
 

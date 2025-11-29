@@ -1,8 +1,7 @@
-package com.product.api.crud_produtos.controller;
+package com.product.api.crud_produtos.domain.usuario;
 
-import com.product.api.crud_produtos.dto.request.UsuarioAtualizarRequestDTO;
-import com.product.api.crud_produtos.dto.response.UsuarioResponseDTO;
-import com.product.api.crud_produtos.service.UsuarioService;
+import com.product.api.crud_produtos.domain.usuario.dto.UsuarioAtualizarRequestDTO;
+import com.product.api.crud_produtos.domain.usuario.dto.UsuarioResponseDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;

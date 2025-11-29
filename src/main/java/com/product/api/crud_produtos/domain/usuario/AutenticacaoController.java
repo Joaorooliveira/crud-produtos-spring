@@ -1,12 +1,10 @@
-package com.product.api.crud_produtos.controller;
+package com.product.api.crud_produtos.domain.usuario;
 
-import com.product.api.crud_produtos.dto.request.UsuarioRequestDTO;
-import com.product.api.crud_produtos.dto.response.UsuarioResponseDTO;
+import com.product.api.crud_produtos.domain.usuario.dto.UsuarioRequestDTO;
+import com.product.api.crud_produtos.domain.usuario.dto.UsuarioResponseDTO;
 import com.product.api.crud_produtos.infra.security.DadosAutenticacao;
-import com.product.api.crud_produtos.entity.Usuario;
 import com.product.api.crud_produtos.infra.security.DadosTokenJWT;
 import com.product.api.crud_produtos.infra.security.TokenService;
-import com.product.api.crud_produtos.repository.UsuarioRepository;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

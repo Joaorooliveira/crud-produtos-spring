@@ -1,9 +1,8 @@
-package com.product.api.crud_produtos.controller;
+package com.product.api.crud_produtos.domain.produto;
 
-import com.product.api.crud_produtos.dto.request.ProdutoAtualizarRequestDto;
-import com.product.api.crud_produtos.dto.request.ProdutoRequestDTO;
-import com.product.api.crud_produtos.dto.response.ProdutoResponseDTO;
-import com.product.api.crud_produtos.service.ProdutoService;
+import com.product.api.crud_produtos.domain.produto.dto.ProdutoAtualizarRequestDto;
+import com.product.api.crud_produtos.domain.produto.dto.ProdutoRequestDTO;
+import com.product.api.crud_produtos.domain.produto.dto.ProdutoResponseDTO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
