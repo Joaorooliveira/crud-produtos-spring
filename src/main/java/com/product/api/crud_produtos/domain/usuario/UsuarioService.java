@@ -1,9 +1,7 @@
-package com.product.api.crud_produtos.service;
+package com.product.api.crud_produtos.domain.usuario;
 
-import com.product.api.crud_produtos.dto.request.UsuarioAtualizarRequestDTO;
-import com.product.api.crud_produtos.dto.response.UsuarioResponseDTO;
-import com.product.api.crud_produtos.entity.Usuario;
-import com.product.api.crud_produtos.repository.UsuarioRepository;
+import com.product.api.crud_produtos.domain.usuario.dto.UsuarioAtualizarRequestDTO;
+import com.product.api.crud_produtos.domain.usuario.dto.UsuarioResponseDTO;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

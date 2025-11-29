@@ -1,10 +1,8 @@
-package com.product.api.crud_produtos.service;
+package com.product.api.crud_produtos.domain.produto;
 
-import com.product.api.crud_produtos.dto.request.ProdutoAtualizarRequestDto;
-import com.product.api.crud_produtos.dto.request.ProdutoRequestDTO;
-import com.product.api.crud_produtos.dto.response.ProdutoResponseDTO;
-import com.product.api.crud_produtos.entity.Produto;
-import com.product.api.crud_produtos.repository.ProdutosRepository;
+import com.product.api.crud_produtos.domain.produto.dto.ProdutoAtualizarRequestDto;
+import com.product.api.crud_produtos.domain.produto.dto.ProdutoRequestDTO;
+import com.product.api.crud_produtos.domain.produto.dto.ProdutoResponseDTO;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
@@ -20,9 +18,9 @@ import java.util.UUID;
 public class ProdutoService {
 
 
-    private final ProdutosRepository repository;
+    private final ProdutoRepository repository;
 
-    public ProdutoService(ProdutosRepository repository) {
+    public ProdutoService(ProdutoRepository repository) {
         this.repository = repository;
     }
 

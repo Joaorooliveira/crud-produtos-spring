@@ -1,6 +1,6 @@
-package com.product.api.crud_produtos.dto.request;
+package com.product.api.crud_produtos.domain.usuario.dto;
 
-import com.product.api.crud_produtos.entity.Usuario;
+import com.product.api.crud_produtos.domain.usuario.Usuario;
 import jakarta.validation.constraints.NotBlank;
 
 public record UsuarioRequestDTO(

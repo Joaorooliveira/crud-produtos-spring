@@ -1,10 +1,7 @@
-package com.product.api.crud_produtos.repository;
+package com.product.api.crud_produtos.domain.usuario;
 
-import com.product.api.crud_produtos.entity.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Optional;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     UserDetails findByLogin(String login);

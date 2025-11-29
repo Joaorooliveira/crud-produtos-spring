@@ -1,6 +1,6 @@
 package com.product.api.crud_produtos.infra.security;
 
-import com.product.api.crud_produtos.repository.UsuarioRepository;
+import com.product.api.crud_produtos.domain.usuario.UsuarioRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
