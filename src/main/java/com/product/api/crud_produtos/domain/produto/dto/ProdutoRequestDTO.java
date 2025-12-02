@@ -1,8 +1,11 @@
 package com.product.api.crud_produtos.domain.produto.dto;
 
+import com.product.api.crud_produtos.domain.categoria.Categoria;
 import com.product.api.crud_produtos.domain.produto.Produto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+
+import java.util.UUID;
 
 public record ProdutoRequestDTO(
         @NotNull
@@ -13,13 +16,18 @@ public record ProdutoRequestDTO(
         float preco,
 
         @NotNull
-        int quantidade
+        int quantidade,
 
+        @NotNull
+        UUID categoriaId
 
-){ public Produto toEntity() {
+) {
+    public Produto toEntity(Categoria categoriaEncontrada) {
         Produto produto = new Produto();
         produto.setNome(nome);
         produto.setPreco(preco);
         produto.setQuantidade(quantidade);
+        produto.setCategoria(categoriaEncontrada);
         return produto;
-}}
+    }
+}
