@@ -48,4 +48,10 @@ public class CategoriaController {
     CategoriaRequestDTO dto) {
         return ResponseEntity.ok(service.atualizarCategoria(id, dto));
     }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> excluirCategoria(@PathVariable UUID id) {
+        service.deletarCategoria(id);
+        return ResponseEntity.noContent().build();
+    }
 }
