@@ -49,9 +49,8 @@ public class CategoriaService {
 
     @Transactional
     public void deletarCategoria(UUID id) {
-        if (!categoriaRepository.existsById(id)) {
-            throw new EntityNotFoundException("Categoria não encontrada com ID: " + id);
-        }
-        categoriaRepository.deleteById(id);
+        var categoria = categoriaRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Categoria não encontrada com ID: " + id));
+        categoriaRepository.delete(categoria);
     }
 }
