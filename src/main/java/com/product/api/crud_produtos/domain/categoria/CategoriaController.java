@@ -42,4 +42,10 @@ public class CategoriaController {
                 .map(categoria -> ResponseEntity.ok(CategoriaResponseDTO.fromEntity(categoria)))
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    @PatchMapping("{id}")
+    public ResponseEntity<CategoriaResponseDTO> atualizarCategoria(@PathVariable UUID id, @RequestBody
+    CategoriaRequestDTO dto) {
+        return ResponseEntity.ok(service.atualizarCategoria(id, dto));
+    }
 }
