@@ -1,12 +1,19 @@
 package com.product.api.crud_produtos.domain.categoria.dto;
 
+
+import com.product.api.crud_produtos.domain.categoria.Categoria;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-import java.io.Serializable;
-import java.util.UUID;
+public record CategoriaRequestDTO(
 
-/**
- * DTO for {@link com.product.api.crud_produtos.domain.categoria.Categoria}
- */
-public record CategoriaResponseDTO(@NotNull UUID id, String nome) implements Serializable {
+        @NotNull
+        @NotBlank
+        String nome
+) {
+    public Categoria toEntity() {
+        Categoria categoria = new Categoria();
+        categoria.setNome(nome);
+        return categoria;
+    }
 }
