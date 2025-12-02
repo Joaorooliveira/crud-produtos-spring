@@ -14,12 +14,13 @@ public class TratadorDeErro {
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity tratarErro404(EntityNotFoundException ex) {
-        var erro  = new MensagemErro(ex.getMessage());
+        var erro = new MensagemErro(ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
     }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity tratarErro400(MethodArgumentNotValidException ex) {
-        var erros  = ex.getFieldErrors();
+        var erros = ex.getFieldErrors();
         return ResponseEntity.badRequest().body(erros.stream().map(DadosErroValidacao::new).toList());
     }
 
@@ -27,6 +28,7 @@ public class TratadorDeErro {
     public ResponseEntity tratarBadCredentials() {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Erro: Usuário inexistente ou senha inválida");
     }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity tratarErro500(Exception ex) {
         System.out.println("ACHEI O ERRO: " + ex.getClass().getName());
@@ -35,12 +37,19 @@ public class TratadorDeErro {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro: " + ex.getLocalizedMessage());
     }
 
-    private record DadosErroValidacao(String campo, String mensagem){
+    private record DadosErroValidacao(String campo, String mensagem) {
 
-        public DadosErroValidacao(FieldError erro){
+        public DadosErroValidacao(FieldError erro) {
             this(erro.getField(), erro.getDefaultMessage());
         }
 
     }
-    private record MensagemErro(String mensagem) {}
+
+    @ExceptionHandler(ValidacaoException.class)
+    public ResponseEntity tratarErroRegraDeNegocio(ValidacaoException ex) {
+        return ResponseEntity.badRequest().body(ex.getMessage());
+    }
+
+    private record MensagemErro(String mensagem) {
+    }
 }
