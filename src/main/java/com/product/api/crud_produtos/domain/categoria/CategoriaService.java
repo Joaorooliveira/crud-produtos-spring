@@ -51,6 +51,7 @@ public class CategoriaService {
     public void deletarCategoria(UUID id) {
         var categoria = categoriaRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("Categoria nao encontrada com ID:" + id));
-        categoriaRepository.delete(categoria);
+        categoria.setAtivo(false);
+        categoriaRepository.save(categoria);
     }
 }
