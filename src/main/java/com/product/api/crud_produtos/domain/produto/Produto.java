@@ -1,19 +1,21 @@
 package com.product.api.crud_produtos.domain.produto;
 
 
+import com.product.api.crud_produtos.domain.categoria.Categoria;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.UUID;
 
-@Builder
 @Entity
-@Table(name ="produtos")
+@Table(name = "produtos")
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
 @Getter
-
 public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -26,5 +28,10 @@ public class Produto {
     private float preco;
     @Column(nullable = false)
     private int quantidade;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+
 
 }
