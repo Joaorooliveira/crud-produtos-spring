@@ -36,9 +36,16 @@ public class ProdutoService {
         return ProdutoResponseDTO.fromEntity(produto);
     }
 
-    public Page<ProdutoResponseDTO> listarProdutos(Pageable pageable) {
-        Page<Produto> listaPaginada = produtoRepository.findAll(pageable);
-        return listaPaginada.map(ProdutoResponseDTO::fromEntity);
+    public Page<ProdutoResponseDTO> listarProdutos(Pageable pageable, UUID categoriaId) {
+        if (categoriaId != null) {
+            if (!categoriaRepository.existsById(categoriaId)) {
+                throw new EntityNotFoundException("Categoria não encontrada com o ID: " + categoriaId);
+            }
+            return produtoRepository.findByCategoriaId(categoriaId, pageable)
+                    .map(ProdutoResponseDTO::fromEntity);
+        }
+        return produtoRepository.findAll(pageable)
+                .map(ProdutoResponseDTO::fromEntity);
     }
 
     public Optional<Produto> buscarPorId(UUID id) {
@@ -80,5 +87,12 @@ public class ProdutoService {
         produtoRepository.delete(produto);
     }
 
+    public Page<ProdutoResponseDTO> listarProdutosPorCategoria(Pageable pageable, UUID categoriaId) {
+        if (!categoriaRepository.existsById(categoriaId)) {
+            throw new EntityNotFoundException("Categoria não encontrada com o ID: " + categoriaId);
+        }
+        var produtosPaginados = produtoRepository.findByCategoriaId(categoriaId, pageable);
+        return produtosPaginados.map(ProdutoResponseDTO::fromEntity);
+    }
 
 }
