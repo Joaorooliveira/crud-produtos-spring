@@ -1,10 +1,14 @@
-package com.product.api.crud_produtos.domain.categoria;
+package com.product.api.crud_produtos.domain.categoria.dto;
 
+
+import com.product.api.crud_produtos.domain.categoria.Categoria;
 
 import java.util.UUID;
 
 public record CategoriaResponseDTO(
         UUID id,
-        String nome)
-{
+        String nome) {
+    public static CategoriaResponseDTO fromEntity(Categoria categoria) {
+        return new CategoriaResponseDTO(categoria.getId(), categoria.getNome());
+    }
 }
