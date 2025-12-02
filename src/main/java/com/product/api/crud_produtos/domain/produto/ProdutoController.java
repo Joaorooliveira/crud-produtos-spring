@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -33,8 +34,10 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public Page<ProdutoResponseDTO> listarProdutos(Pageable pageable) {
-        return service.listarProdutos(pageable);
+    public ResponseEntity<Page<ProdutoResponseDTO>> listarProdutos(
+            @PageableDefault(size = 10) Pageable pageable,
+            @RequestParam(required = false) UUID categoriaId) {
+        return ResponseEntity.ok(service.listarProdutos(pageable, categoriaId));
     }
 
     @GetMapping("{id}")
@@ -55,7 +58,6 @@ public class ProdutoController {
         service.deletarProduto(id);
         return ResponseEntity.noContent().build();
     }
-
 }
 
 
