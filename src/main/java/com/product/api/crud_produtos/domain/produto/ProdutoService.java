@@ -4,12 +4,16 @@ import com.product.api.crud_produtos.domain.categoria.CategoriaRepository;
 import com.product.api.crud_produtos.domain.produto.dto.ProdutoAtualizarRequestDTO;
 import com.product.api.crud_produtos.domain.produto.dto.ProdutoRequestDTO;
 import com.product.api.crud_produtos.domain.produto.dto.ProdutoResponseDTO;
+import com.product.api.crud_produtos.domain.produto.validacoes.atualizacao.ValidadorAtualizacaoProduto;
+import com.product.api.crud_produtos.domain.produto.validacoes.criacao.ValidadorProduto;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -20,13 +24,22 @@ public class ProdutoService {
     private final ProdutoRepository produtoRepository;
     private final CategoriaRepository categoriaRepository;
 
-    public ProdutoService(ProdutoRepository produtoRepository, CategoriaRepository categoriaRepository) {
+    @Autowired
+    private List<ValidadorProduto> validadores;
+
+    @Autowired
+    private final List<ValidadorAtualizacaoProduto> validadoresAtualizacao;
+
+    public ProdutoService(ProdutoRepository produtoRepository, CategoriaRepository categoriaRepository, List<ValidadorAtualizacaoProduto> validadoresAtualizacao) {
         this.produtoRepository = produtoRepository;
         this.categoriaRepository = categoriaRepository;
+        this.validadoresAtualizacao = validadoresAtualizacao;
     }
 
     @Transactional
     public ProdutoResponseDTO criarProduto(ProdutoRequestDTO dto) {
+
+        validadores.forEach(v -> v.validar(dto));
 
         var categoria = categoriaRepository.findById(dto.categoriaId()).orElseThrow(() -> new EntityNotFoundException(
                 "Categoria nao encontrado com o ID: "
@@ -54,6 +67,7 @@ public class ProdutoService {
 
     @Transactional
     public ProdutoResponseDTO atualizarProduto(UUID id, ProdutoAtualizarRequestDTO dto) {
+        validadoresAtualizacao.forEach(v -> v.validar(id, dto));
         var produtoEntity = produtoRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Produto não encontrado com o ID: " + id));
 
