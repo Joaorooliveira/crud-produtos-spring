@@ -1,4 +1,4 @@
-package com.product.api.crud_produtos.domain.produto.validacoes;
+package com.product.api.crud_produtos.domain.produto.validacoes.criacao;
 
 import com.product.api.crud_produtos.domain.categoria.CategoriaRepository;
 import com.product.api.crud_produtos.domain.produto.dto.ProdutoRequestDTO;
