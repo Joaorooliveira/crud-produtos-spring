@@ -1,4 +1,4 @@
-package com.product.api.crud_produtos.domain.produto.validacoes;
+package com.product.api.crud_produtos.domain.produto.validacoes.atualizacao;
 
 import com.product.api.crud_produtos.domain.produto.ProdutoRepository;
 import com.product.api.crud_produtos.domain.produto.dto.ProdutoAtualizarRequestDTO;
@@ -25,7 +25,7 @@ public class ValidadorReducaoDrasticaPreco implements ValidadorAtualizacaoProdut
 
         double precoAntigo = produtoAtual.getPreco();
         double novoPreco = dados.preco();
-        
+
         if (novoPreco < (precoAntigo * 0.10)) {
             throw new ValidacaoException(
                     "Erro de segurança: Não é permitido reduzir o preço em mais de 90% de uma vez."
