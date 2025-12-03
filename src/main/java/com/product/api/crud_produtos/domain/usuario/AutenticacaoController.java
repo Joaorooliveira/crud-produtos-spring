@@ -5,6 +5,8 @@ import com.product.api.crud_produtos.domain.usuario.dto.UsuarioResponseDTO;
 import com.product.api.crud_produtos.infra.security.DadosAutenticacao;
 import com.product.api.crud_produtos.infra.security.DadosTokenJWT;
 import com.product.api.crud_produtos.infra.security.TokenService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/auth")
+@Tag(name = "Login", description = "Gerenciador de Login")
 public class AutenticacaoController {
 
     private final UsuarioRepository usuarioRepository;
@@ -33,8 +36,9 @@ public class AutenticacaoController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity efetuarLogin(@RequestBody @Valid DadosAutenticacao dados){
-        var authenticationToken = new UsernamePasswordAuthenticationToken(dados.login(),dados.senha());
+    @Operation(summary = "Efetuar Login", description = "Efetua login e retorna um Token")
+    public ResponseEntity efetuarLogin(@RequestBody @Valid DadosAutenticacao dados) {
+        var authenticationToken = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
         var authentication = manager.authenticate(authenticationToken);
 
         var tokenJWT = tokenService.gerarToken((Usuario) authentication.getPrincipal());
@@ -42,12 +46,13 @@ public class AutenticacaoController {
     }
 
     @PostMapping("/registrar")
-    public ResponseEntity<UsuarioResponseDTO> registrarUsuario(@RequestBody @Valid UsuarioRequestDTO request){
+    @Operation(summary = "Registrar Usuario", description = "Registrar um usuario e retorna dados do usuario criado")
+    public ResponseEntity<UsuarioResponseDTO> registrarUsuario(@RequestBody @Valid UsuarioRequestDTO request) {
         Usuario usuario = new Usuario();
         usuario.setLogin(request.login());
         usuario.setSenha(passwordEncoder.encode(request.senha()));
         usuarioRepository.saveAndFlush(usuario);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new UsuarioResponseDTO(usuario.getId(),usuario.getLogin()));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new UsuarioResponseDTO(usuario.getId(), usuario.getLogin()));
     }
 
 }
