@@ -3,10 +3,11 @@
 ![Badge de Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)
 ![Badge de Licença](https://img.shields.io/badge/license-MIT-blue)
 
-
-Uma API RESTful desenvolvida em Java e Spring Boot para realizar as quatro operações básicas (CRUD - Create, Read, Update, Delete) em uma entidade `Produto`.
+Uma API RESTful desenvolvida em Java e Spring Boot para realizar as quatro operações básicas (CRUD - Create, Read,
+Update, Delete) em uma entidade `Produto`.
 
 Este projeto demonstra o uso de boas práticas de desenvolvimento de APIs, incluindo:
+
 * **DTOs (Data Transfer Objects)** com `records` do Java.
 * Separação clara de responsabilidades (Camadas de Controller, Service e Repository).
 * **Validações** de entrada de dados com `Bean Validation`.
@@ -14,6 +15,7 @@ Este projeto demonstra o uso de boas práticas de desenvolvimento de APIs, inclu
 * Atualizações parciais seguras com o padrão `PATCH` (implementado com `@PatchMapping`).
 
 ## Status do Projeto
+
 🚧 Em Desenvolvimento 🚧
 
 ## 🛠️ Tecnologias Utilizadas
@@ -30,25 +32,26 @@ Este projeto demonstra o uso de boas práticas de desenvolvimento de APIs, inclu
 
 É necessário ter o Java 17 (ou superior) e o Maven instalados.
 
-1.  **Clone o repositório:**
-    ```bash
-    git clone https://github.com/Joaorooliveira/crud-produtos-spring.git
-    ```
+1. **Clone o repositório:**
+   ```bash
+   git clone https://github.com/Joaorooliveira/crud-produtos-spring.git
+   ```
 
-2.  **Navegue até o diretório do projeto:**
-    ```bash
-    cd crud-produtos-spring
-    ```
+2. **Navegue até o diretório do projeto:**
+   ```bash
+   cd crud-produtos-spring
+   ```
 
-3.  **Execute o projeto:**
-    * A forma mais simples é abrir o projeto em sua IDE (IntelliJ, Eclipse, VSCode) e executar a classe principal `CrudProdutosApplication.java`.
+3. **Execute o projeto:**
+    * A forma mais simples é abrir o projeto em sua IDE (IntelliJ, Eclipse, VSCode) e executar a classe principal
+      `CrudProdutosApplication.java`.
     * Ou, você pode rodar via Maven:
-    ```bash
-    ./mvnw spring-boot:run
-    ```
+   ```bash
+   ./mvnw spring-boot:run
+   ```
 
-4.  **Acesse a API:**
-    A aplicação estará rodando em `http://localhost:8080`.
+4. **Acesse a API:**
+   A aplicação estará rodando em `http://localhost:8080`.
 
 ## 📖 Endpoints da API
 
@@ -67,6 +70,7 @@ A rota base para todos os endpoints é `/api/produtos`.
 ### DTOs (Corpos das Requisições)
 
 **`ProdutoRequestDTO` (para Criar)**
+
 ```json
 {
   "nome": "Nome do Produto",
@@ -76,16 +80,17 @@ A rota base para todos os endpoints é `/api/produtos`.
 ```
 
 **`ProdutoAtualizarRequestDto` (para Atualizar) Envie apenas os campos que deseja alterar.**
+
 ```json
 
 {
   "preco": 249.50,
   "quantidade": 15
-
 }
 ```
 
 📁 Estrutura do Projeto (Simplificada)
+
 ```
 .
 └── src
@@ -98,3 +103,4 @@ A rota base para todos os endpoints é `/api/produtos`.
                 ├── repository  # Interface com o Banco (JPA)
                 └── service     # Camada de Regras de Negócio
 ```
+
