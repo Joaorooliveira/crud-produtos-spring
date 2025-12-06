@@ -5,6 +5,8 @@ import com.product.api.crud_produtos.domain.produto.dto.ProdutoRequestDTO;
 import com.product.api.crud_produtos.infra.exception.ValidacaoException;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+
 @Component
 public class ValidadorPrecoMinimoEletronicos implements ValidadorProduto {
 
@@ -18,11 +20,15 @@ public class ValidadorPrecoMinimoEletronicos implements ValidadorProduto {
     public void validar(ProdutoRequestDTO dados) {
         var categoria = categoriaRepository.findById(dados.categoriaId()).orElse(null);
 
+        BigDecimal precoMinimo = new BigDecimal("20.0");
+
         if (categoria != null
                 && categoria.getNome().equalsIgnoreCase("Eletrônicos")
-                && dados.preco() < 50.0) {
+                && dados.preco().compareTo(precoMinimo) < 0) { // < 0 significa "menor que"
 
-            throw new ValidacaoException("Produtos da categoria Eletrônicos não podem custar menos de R$ 20,00");
+            throw new ValidacaoException(
+                    "Produtos da categoria Eletrônicos não podem custar menos de R$ " + precoMinimo
+            );
         }
     }
 }

@@ -3,13 +3,14 @@ package com.product.api.crud_produtos.domain.produto.dto;
 import com.product.api.crud_produtos.domain.categoria.dto.CategoriaResponseDTO;
 import com.product.api.crud_produtos.domain.produto.Produto;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 
 public record ProdutoResponseDTO(
         UUID id,
         String nome,
-        float preco,
+        BigDecimal preco,
         int quantidade,
         CategoriaResponseDTO categoria
 ) {

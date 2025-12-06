@@ -5,6 +5,7 @@ import com.product.api.crud_produtos.domain.produto.dto.ProdutoAtualizarRequestD
 import com.product.api.crud_produtos.infra.exception.ValidacaoException;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Component
@@ -23,12 +24,15 @@ public class ValidadorReducaoDrasticaPreco implements ValidadorAtualizacaoProdut
         var produtoAtual = produtoRepository.findById(id).orElse(null);
         if (produtoAtual == null) return;
 
-        double precoAntigo = produtoAtual.getPreco();
-        double novoPreco = dados.preco();
+        BigDecimal precoAntigo = produtoAtual.getPreco();
+        BigDecimal novoPreco = dados.preco();
 
-        if (novoPreco < (precoAntigo * 0.10)) {
+        BigDecimal limiteMinimo = precoAntigo.multiply(new BigDecimal("0.10"));
+
+        if (novoPreco.compareTo(limiteMinimo) < 0) {
             throw new ValidacaoException(
-                    "Erro de segurança: Não é permitido reduzir o preço em mais de 90% de uma vez."
+                    "Erro de segurança: Não é permitido reduzir o preço em mais de 90% de uma vez. " +
+                            "O menor valor permitido seria: " + limiteMinimo
             );
         }
     }
