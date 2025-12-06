@@ -5,6 +5,7 @@ import com.product.api.crud_produtos.domain.produto.Produto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 public record ProdutoRequestDTO(
@@ -13,7 +14,7 @@ public record ProdutoRequestDTO(
         String nome,
 
         @NotNull
-        float preco,
+        BigDecimal preco,
 
         @NotNull
         int quantidade,
