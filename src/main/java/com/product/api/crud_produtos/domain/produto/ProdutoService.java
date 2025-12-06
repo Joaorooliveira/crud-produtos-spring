@@ -7,7 +7,6 @@ import com.product.api.crud_produtos.domain.produto.dto.ProdutoResponseDTO;
 import com.product.api.crud_produtos.domain.produto.validacoes.atualizacao.ValidadorAtualizacaoProduto;
 import com.product.api.crud_produtos.domain.produto.validacoes.criacao.ValidadorProduto;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -20,32 +19,31 @@ import java.util.UUID;
 @Service
 public class ProdutoService {
 
-
     private final ProdutoRepository produtoRepository;
     private final CategoriaRepository categoriaRepository;
-
-    @Autowired
-    private List<ValidadorProduto> validadores;
-
-    @Autowired
+    private final List<ValidadorProduto> validadores;
     private final List<ValidadorAtualizacaoProduto> validadoresAtualizacao;
 
-    public ProdutoService(ProdutoRepository produtoRepository, CategoriaRepository categoriaRepository, List<ValidadorAtualizacaoProduto> validadoresAtualizacao) {
+    public ProdutoService(
+            ProdutoRepository produtoRepository,
+            CategoriaRepository categoriaRepository,
+            List<ValidadorProduto> validadores,
+            List<ValidadorAtualizacaoProduto> validadoresAtualizacao) {
+
         this.produtoRepository = produtoRepository;
         this.categoriaRepository = categoriaRepository;
+        this.validadores = validadores;
         this.validadoresAtualizacao = validadoresAtualizacao;
     }
 
     @Transactional
     public ProdutoResponseDTO criarProduto(ProdutoRequestDTO dto) {
-
         validadores.forEach(v -> v.validar(dto));
 
-        var categoria = categoriaRepository.findById(dto.categoriaId()).orElseThrow(() -> new EntityNotFoundException(
-                "Categoria nao encontrado com o ID: "
-                        + dto.categoriaId()));
+        var categoria = categoriaRepository.findById(dto.categoriaId())
+                .orElseThrow(() -> new EntityNotFoundException("Categoria nao encontrada com o ID: " + dto.categoriaId()));
 
-        var produto = produtoRepository.saveAndFlush(dto.toEntity(categoria));
+        var produto = produtoRepository.save(dto.toEntity(categoria));
         return ProdutoResponseDTO.fromEntity(produto);
     }
 
@@ -68,24 +66,19 @@ public class ProdutoService {
     @Transactional
     public ProdutoResponseDTO atualizarProduto(UUID id, ProdutoAtualizarRequestDTO dto) {
         validadoresAtualizacao.forEach(v -> v.validar(id, dto));
+
         var produtoEntity = produtoRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Produto não encontrado com o ID: " + id));
 
-        if (dto.nome() != null) {
-            produtoEntity.setNome(dto.nome());
-        }
-        if (dto.preco() != null) {
-            produtoEntity.setPreco(dto.preco());
-        }
-        if (dto.quantidade() != null) {
-            produtoEntity.setQuantidade(dto.quantidade());
-        }
+        if (dto.nome() != null) produtoEntity.setNome(dto.nome());
+
+        if (dto.preco() != null) produtoEntity.setPreco(dto.preco());
+
+        if (dto.quantidade() != null) produtoEntity.setQuantidade(dto.quantidade());
 
         if (dto.categoriaId() != null) {
             var novaCategoria = categoriaRepository.findById(dto.categoriaId())
-                    .orElseThrow(() -> new EntityNotFoundException("Categoria não encontrada com o ID: " +
-                            dto.categoriaId()));
-
+                    .orElseThrow(() -> new EntityNotFoundException("Categoria não encontrada com o ID: " + dto.categoriaId()));
             produtoEntity.setCategoria(novaCategoria);
         }
 
@@ -96,17 +89,10 @@ public class ProdutoService {
 
     @Transactional
     public void deletarProduto(UUID id) {
-        var produto = buscarPorId(id).orElseThrow(() -> new EntityNotFoundException("Produto nao encontrado com o ID: "
-                + id));
-        produtoRepository.delete(produto);
-    }
-
-    public Page<ProdutoResponseDTO> listarProdutosPorCategoria(Pageable pageable, UUID categoriaId) {
-        if (!categoriaRepository.existsById(categoriaId)) {
-            throw new EntityNotFoundException("Categoria não encontrada com o ID: " + categoriaId);
+        if (!produtoRepository.existsById(id)) {
+            throw new EntityNotFoundException("Produto nao encontrado com o ID: " + id);
         }
-        var produtosPaginados = produtoRepository.findByCategoriaId(categoriaId, pageable);
-        return produtosPaginados.map(ProdutoResponseDTO::fromEntity);
+        produtoRepository.deleteById(id);
     }
 
 }
