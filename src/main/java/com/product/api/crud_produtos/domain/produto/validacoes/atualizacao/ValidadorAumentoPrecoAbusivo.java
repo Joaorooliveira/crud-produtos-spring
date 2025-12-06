@@ -5,6 +5,7 @@ import com.product.api.crud_produtos.domain.produto.dto.ProdutoAtualizarRequestD
 import com.product.api.crud_produtos.infra.exception.ValidacaoException;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Component
@@ -28,11 +29,12 @@ public class ValidadorAumentoPrecoAbusivo implements ValidadorAtualizacaoProduto
             return;
         }
 
-        double precoAntigo = produtoNoBanco.getPreco();
-        double precoNovo = dados.preco();
-        double limiteMaximo = precoAntigo * 1.5;
+        BigDecimal precoAntigo = produtoNoBanco.getPreco();
+        BigDecimal precoNovo = dados.preco();
+        BigDecimal limiteMaximo = precoAntigo.multiply(new BigDecimal("1.5"));
+        limiteMaximo = limiteMaximo.setScale(2, java.math.RoundingMode.HALF_UP);
 
-        if (precoNovo > limiteMaximo) {
+        if (precoNovo.compareTo(limiteMaximo) > 0) {
             throw new ValidacaoException(
                     "Aumento abusivo! O preço não pode subir mais que 50% de uma vez. " +
                             "Máximo permitido: " + limiteMaximo
