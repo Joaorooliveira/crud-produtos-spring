@@ -42,7 +42,7 @@ VALUES (gen_random_uuid(), 'Smartphone Top de Linha', 3200.00, 20, 'a0eebc99-9c0
 
 -- 3. Inserindo Usuário
 INSERT INTO usuarios (id, login, senha)
-VALUES (1, 'joao.victor@proton.me', '$2a$12$LmVAr6uqaLks5XZy5l04M.ShClWsEBqr/8SbFbcg7JFFOi8P26M4a');
+VALUES (2, 'joao.victor@proton.me', '$2a$12$LmVAr6uqaLks5XZy5l04M.ShClWsEBqr/8SbFbcg7JFFOi8P26M4a');
 
 -- Ajusta a sequence do ID do usuario para não dar erro no próximo insert manual
 SELECT setval('usuarios_id_seq', (SELECT MAX(id) FROM usuarios));
