@@ -1,106 +1,123 @@
-# API de Gerenciamento de Produtos (CRUD)
+# GitMarket API 🛒
 
 ![Badge de Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)
 ![Badge de Licença](https://img.shields.io/badge/license-MIT-blue)
+![Java](https://img.shields.io/badge/java-17%2B-orange)
+![Spring Boot](https://img.shields.io/badge/spring--boot-3-green)
 
-Uma API RESTful desenvolvida em Java e Spring Boot para realizar as quatro operações básicas (CRUD - Create, Read,
-Update, Delete) em uma entidade `Produto`.
+Uma API RESTful robusta para E-commerce, desenvolvida em Java e Spring Boot. O **GitMarket** gerencia todo o ecossistema
+de vendas, desde o cadastro de produtos e categorias até a autenticação segura de usuários.
 
-Este projeto demonstra o uso de boas práticas de desenvolvimento de APIs, incluindo:
+Este projeto demonstra a aplicação de arquitetura profissional, boas práticas de código e ferramentas modernas do
+mercado.
 
-* **DTOs (Data Transfer Objects)** com `records` do Java.
-* Separação clara de responsabilidades (Camadas de Controller, Service e Repository).
-* **Validações** de entrada de dados com `Bean Validation`.
-* Tratamento de exceções e retornos HTTP semânticos.
-* Atualizações parciais seguras com o padrão `PATCH` (implementado com `@PatchMapping`).
+## 🚀 Funcionalidades Atuais
 
-## Status do Projeto
+* **Autenticação e Segurança:**
+    * Login e Registro de usuários.
+    * Proteção de rotas com **Spring Security** e Tokens **JWT** (JSON Web Token).
+* **Gestão de Produtos:**
+    * CRUD completo (Create, Read, Update, Delete).
+    * Validações de regras de negócio (ex: proibição de redução drástica de preço).
+    * Paginação e ordenação de listagens.
+* **Gestão de Categorias:**
+    * Organização de produtos por departamentos.
+    * Soft Delete (exclusão lógica) para manter integridade dos dados.
+* **Documentação:**
+    * API documentada automaticamente com **Swagger/OpenAPI**.
+* **Banco de Dados:**
+    * Versionamento de banco de dados com **Flyway**.
+    * Suporte a **PostgreSQL** (Produção/Dev) e H2 (Testes).
 
-🚧 Em Desenvolvimento 🚧
+## 🚧 Roadmap (Em Desenvolvimento)
+
+O projeto está em constante evolução. Próximas funcionalidades planejadas:
+
+- [ ] **Carrinho de Compras:** Adicionar/remover itens e calcular totais.
+- [ ] **Cupons de Desconto:** Lógica promocional e validação de cupons.
+- [ ] **Checkout e Pagamento:** Integração com gateways de pagamento.
+- [ ] **Gestão de Pedidos:** Histórico e status de entrega.
 
 ## 🛠️ Tecnologias Utilizadas
 
 * **Java 17+**
-* **Spring Boot 3** (ou superior)
-* **Spring Data JPA**: Para persistência de dados.
-* **H2 Database**: Banco de dados em memória para desenvolvimento/testes.
-* **Maven**: Gerenciador de dependências.
-* **Lombok**: Para reduzir boilerplate (ex: `@RequiredArgsConstructor`).
-* **Bean Validation**: Para validações dos DTOs.
+* **Spring Boot 3**
+* **Spring Security & JWT**: Para autenticação stateless.
+* **Spring Data JPA**: Camada de persistência.
+* **Flyway**: Migrations e versionamento de banco de dados.
+* **PostgreSQL**: Banco de dados relacional.
+* **Swagger (OpenAPI)**: Documentação interativa.
+* **Bean Validation**: Validação de DTOs.
+* **Lombok**: Redução de código boilerplate.
 
 ## 🚀 Como Rodar o Projeto
 
-É necessário ter o Java 17 (ou superior) e o Maven instalados.
+### Pré-requisitos
+
+* Java 17 ou superior.
+* Maven instalado.
+* PostgreSQL (Opcional, caso queira rodar com banco real).
 
 1. **Clone o repositório:**
    ```bash
-   git clone https://github.com/Joaorooliveira/crud-produtos-spring.git
+   git clone https://github.com/Joaorooliveira/gitmarket.git
    ```
 
-2. **Navegue até o diretório do projeto:**
+2. **Navegue até o diretório:**
    ```bash
-   cd crud-produtos-spring
+   cd gitmarket
    ```
 
-3. **Execute o projeto:**
-    * A forma mais simples é abrir o projeto em sua IDE (IntelliJ, Eclipse, VSCode) e executar a classe principal
-      `CrudProdutosApplication.java`.
-    * Ou, você pode rodar via Maven:
+3. **Configuração do Banco de Dados:**
+    * O projeto está configurado para conectar no PostgreSQL.
+    * Certifique-se de configurar a variável de ambiente `DB_PASSWORD` ou ajustar o arquivo `application.properties` com
+      suas credenciais locais.
+
+4. **Execute a aplicação:**
    ```bash
    ./mvnw spring-boot:run
    ```
 
-4. **Acesse a API:**
-   A aplicação estará rodando em `http://localhost:8080`.
+5. **Acesse a Documentação (Swagger):**
+   Com a aplicação rodando, acesse:
+   👉 `http://localhost:8080/swagger-ui.html`
 
-## 📖 Endpoints da API
+## 📖 Endpoints Principais
 
-A rota base para todos os endpoints é `/api/produtos`.
-
-| Método | Rota | Descrição | Corpo (Body) | Retorno de Sucesso |
-| :--- | :--- | :--- | :--- | :--- |
-| `POST` | `/create` | Cria um novo produto. | `ProdutoRequestDTO` | `200 OK` (com `Produto` entity) |
-| `GET` | `/list` | Lista todos os produtos cadastrados. | N/A | `200 OK` (com `List<ProdutoResponseDTO>`) |
-| `GET` | `/list/{id}` | Busca um produto específico pelo seu ID. | N/A | `200 OK` (com `ProdutoResponseDTO`) |
-| `PATCH` | `/edit/{id}` | Atualiza um produto (parcial ou total). | `ProdutoAtualizarRequestDto` | `200 OK` (com `ProdutoResponseDTO`) |
-| `DELETE` | `/delete/{id}` | Deleta um produto pelo seu ID. | N/A | `204 No Content` |
+| Recurso        | Método | Rota                  | Descrição                              |
+|:---------------|:-------|:----------------------|:---------------------------------------|
+| **Auth**       | `POST` | `/api/auth/login`     | Autentica usuário e retorna Token JWT. |
+| **Auth**       | `POST` | `/api/auth/registrar` | Cria um novo usuário no sistema.       |
+| **Produtos**   | `GET`  | `/api/produtos`       | Lista produtos (paginado).             |
+| **Produtos**   | `POST` | `/api/produtos`       | Cria novo produto (Requer Token).      |
+| **Categorias** | `GET`  | `/api/categorias`     | Lista categorias disponíveis.          |
 
 ---
 
-### DTOs (Corpos das Requisições)
-
-**`ProdutoRequestDTO` (para Criar)**
+### Exemplo de JSON (Criar Produto)
 
 ```json
 {
-  "nome": "Nome do Produto",
-  "preco": 199.99,
-  "quantidade": 10
+  "nome": "Notebook Gamer",
+  "preco": 4500.00,
+  "quantidade": 10,
+  "categoriaId": "a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11"
 }
 ```
 
-**`ProdutoAtualizarRequestDto` (para Atualizar) Envie apenas os campos que deseja alterar.**
+### 📂 Estrutura do Projeto
 
-```json
+#### A arquitetura segue o padrão de camadas (Layered Architecture) focada no domínio:
 
-{
-  "preco": 249.50,
-  "quantidade": 15
-}
+```plantuml
+src/main/java/com/product/api/gitmarket
+├── domain # Regras de negócio e Entidades
+│ ├── categoria # Módulo de Categorias
+│ ├── produto # Módulo de Produtos (com validações)
+│ └── usuario # Módulo de Usuários
+├── infra # Configurações transversais
+│ ├── exception # Tratamento global de erros
+│ ├── security # Configurações de Segurança e Token JWT
+│ └── springdoc # Configuração do Swagger
+└── GitMarketApplication.java
 ```
-
-📁 Estrutura do Projeto (Simplificada)
-
-```
-.
-└── src
-    └── main
-        └── java
-            └── com/product/api/crud_produtos
-                ├── controller  # Camada de API (Endpoints)
-                ├── dto         # Data Transfer Objects (Records)
-                ├── entities    # Entidades do Banco (Produto)
-                ├── repository  # Interface com o Banco (JPA)
-                └── service     # Camada de Regras de Negócio
-```
-
