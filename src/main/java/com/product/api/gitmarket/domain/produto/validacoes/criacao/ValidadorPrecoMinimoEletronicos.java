@@ -1,8 +1,8 @@
-package com.product.api.crud_produtos.domain.produto.validacoes.criacao;
+package com.product.api.gitmarket.domain.produto.validacoes.criacao;
 
-import com.product.api.crud_produtos.domain.categoria.CategoriaRepository;
-import com.product.api.crud_produtos.domain.produto.dto.ProdutoRequestDTO;
-import com.product.api.crud_produtos.infra.exception.ValidacaoException;
+import com.product.api.gitmarket.domain.categoria.CategoriaRepository;
+import com.product.api.gitmarket.domain.produto.dto.ProdutoRequestDTO;
+import com.product.api.gitmarket.infra.exception.ValidacaoException;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;

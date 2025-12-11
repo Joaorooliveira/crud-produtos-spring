@@ -1,7 +1,7 @@
-package com.product.api.crud_produtos.domain.usuario;
+package com.product.api.gitmarket.domain.usuario;
 
-import com.product.api.crud_produtos.domain.usuario.dto.UsuarioAtualizarRequestDTO;
-import com.product.api.crud_produtos.domain.usuario.dto.UsuarioResponseDTO;
+import com.product.api.gitmarket.domain.usuario.dto.UsuarioAtualizarRequestDTO;
+import com.product.api.gitmarket.domain.usuario.dto.UsuarioResponseDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;

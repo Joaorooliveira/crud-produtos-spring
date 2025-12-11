@@ -1,4 +1,4 @@
-package com.product.api.crud_produtos.domain.produto;
+package com.product.api.gitmarket.domain.produto;
 
 
 import org.springframework.data.domain.Page;

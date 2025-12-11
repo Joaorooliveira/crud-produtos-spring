@@ -1,6 +1,6 @@
-package com.product.api.crud_produtos.domain.usuario.dto;
+package com.product.api.gitmarket.domain.usuario.dto;
 
-import com.product.api.crud_produtos.domain.usuario.Usuario;
+import com.product.api.gitmarket.domain.usuario.Usuario;
 import jakarta.validation.constraints.NotBlank;
 
 public record UsuarioRequestDTO(

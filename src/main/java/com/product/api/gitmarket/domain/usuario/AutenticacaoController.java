@@ -1,10 +1,10 @@
-package com.product.api.crud_produtos.domain.usuario;
+package com.product.api.gitmarket.domain.usuario;
 
-import com.product.api.crud_produtos.domain.usuario.dto.UsuarioRequestDTO;
-import com.product.api.crud_produtos.domain.usuario.dto.UsuarioResponseDTO;
-import com.product.api.crud_produtos.infra.security.DadosAutenticacao;
-import com.product.api.crud_produtos.infra.security.DadosTokenJWT;
-import com.product.api.crud_produtos.infra.security.TokenService;
+import com.product.api.gitmarket.domain.usuario.dto.UsuarioRequestDTO;
+import com.product.api.gitmarket.domain.usuario.dto.UsuarioResponseDTO;
+import com.product.api.gitmarket.infra.security.DadosAutenticacao;
+import com.product.api.gitmarket.infra.security.DadosTokenJWT;
+import com.product.api.gitmarket.infra.security.TokenService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

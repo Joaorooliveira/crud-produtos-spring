@@ -1,4 +1,4 @@
-package com.product.api.crud_produtos.domain.produto.dto;
+package com.product.api.gitmarket.domain.produto.dto;
 
 import java.math.BigDecimal;
 import java.util.UUID;

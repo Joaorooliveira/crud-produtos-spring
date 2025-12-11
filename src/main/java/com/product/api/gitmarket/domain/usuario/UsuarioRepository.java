@@ -1,4 +1,4 @@
-package com.product.api.crud_produtos.domain.usuario;
+package com.product.api.gitmarket.domain.usuario;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.userdetails.UserDetails;

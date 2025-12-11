@@ -1,6 +1,6 @@
-package com.product.api.crud_produtos.domain.produto.validacoes.atualizacao;
+package com.product.api.gitmarket.domain.produto.validacoes.atualizacao;
 
-import com.product.api.crud_produtos.domain.produto.dto.ProdutoAtualizarRequestDTO;
+import com.product.api.gitmarket.domain.produto.dto.ProdutoAtualizarRequestDTO;
 
 import java.util.UUID;
 

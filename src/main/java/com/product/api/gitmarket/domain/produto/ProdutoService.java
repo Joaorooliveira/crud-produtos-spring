@@ -1,11 +1,11 @@
-package com.product.api.crud_produtos.domain.produto;
+package com.product.api.gitmarket.domain.produto;
 
-import com.product.api.crud_produtos.domain.categoria.CategoriaRepository;
-import com.product.api.crud_produtos.domain.produto.dto.ProdutoAtualizarRequestDTO;
-import com.product.api.crud_produtos.domain.produto.dto.ProdutoRequestDTO;
-import com.product.api.crud_produtos.domain.produto.dto.ProdutoResponseDTO;
-import com.product.api.crud_produtos.domain.produto.validacoes.atualizacao.ValidadorAtualizacaoProduto;
-import com.product.api.crud_produtos.domain.produto.validacoes.criacao.ValidadorProduto;
+import com.product.api.gitmarket.domain.categoria.CategoriaRepository;
+import com.product.api.gitmarket.domain.produto.dto.ProdutoAtualizarRequestDTO;
+import com.product.api.gitmarket.domain.produto.dto.ProdutoRequestDTO;
+import com.product.api.gitmarket.domain.produto.dto.ProdutoResponseDTO;
+import com.product.api.gitmarket.domain.produto.validacoes.atualizacao.ValidadorAtualizacaoProduto;
+import com.product.api.gitmarket.domain.produto.validacoes.criacao.ValidadorProduto;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

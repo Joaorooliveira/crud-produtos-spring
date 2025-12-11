@@ -1,4 +1,4 @@
-package com.product.api.crud_produtos.domain.categoria;
+package com.product.api.gitmarket.domain.categoria;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

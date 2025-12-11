@@ -1,4 +1,4 @@
-package com.product.api.crud_produtos.infra.exception;
+package com.product.api.gitmarket.infra.exception;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;

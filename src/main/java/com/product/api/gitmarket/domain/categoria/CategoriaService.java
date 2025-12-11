@@ -1,7 +1,7 @@
-package com.product.api.crud_produtos.domain.categoria;
+package com.product.api.gitmarket.domain.categoria;
 
-import com.product.api.crud_produtos.domain.categoria.dto.CategoriaRequestDTO;
-import com.product.api.crud_produtos.domain.categoria.dto.CategoriaResponseDTO;
+import com.product.api.gitmarket.domain.categoria.dto.CategoriaRequestDTO;
+import com.product.api.gitmarket.domain.categoria.dto.CategoriaResponseDTO;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

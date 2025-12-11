@@ -1,10 +1,10 @@
-package com.product.api.crud_produtos.infra.security;
+package com.product.api.gitmarket.infra.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.product.api.crud_produtos.domain.usuario.Usuario;
+import com.product.api.gitmarket.domain.usuario.Usuario;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -21,17 +21,17 @@ public class TokenService {
     public String gerarToken(Usuario usuario) {
         try {
             var algoritmo = Algorithm.HMAC256(secret);
-            return  JWT.create()
+            return JWT.create()
                     .withIssuer("API Crud Produtos")
                     .withSubject(usuario.getLogin())
                     .withExpiresAt(dataExpiracao())
                     .sign(algoritmo);
-        } catch (JWTCreationException exception){
-            throw new RuntimeException("Erro ao gerar token jwt",exception);
+        } catch (JWTCreationException exception) {
+            throw new RuntimeException("Erro ao gerar token jwt", exception);
         }
     }
 
-    public String getSubject(String tokenJWT){
+    public String getSubject(String tokenJWT) {
         try {
             var algoritmo = Algorithm.HMAC256(secret);
             return JWT.require(algoritmo)
@@ -40,7 +40,7 @@ public class TokenService {
                     .verify(tokenJWT)
                     .getSubject();
 
-        } catch (JWTVerificationException exception){
+        } catch (JWTVerificationException exception) {
             throw new RuntimeException("Token JWT invalido ou expirado");
         }
     }

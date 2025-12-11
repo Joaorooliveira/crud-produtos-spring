@@ -1,7 +1,7 @@
-package com.product.api.crud_produtos.domain.produto.dto;
+package com.product.api.gitmarket.domain.produto.dto;
 
-import com.product.api.crud_produtos.domain.categoria.Categoria;
-import com.product.api.crud_produtos.domain.produto.Produto;
+import com.product.api.gitmarket.domain.categoria.Categoria;
+import com.product.api.gitmarket.domain.produto.Produto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 

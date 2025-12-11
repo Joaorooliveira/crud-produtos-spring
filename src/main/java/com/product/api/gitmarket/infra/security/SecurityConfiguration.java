@@ -1,4 +1,4 @@
-package com.product.api.crud_produtos.infra.security;
+package com.product.api.gitmarket.infra.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

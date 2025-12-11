@@ -1,6 +1,6 @@
-package com.product.api.crud_produtos.infra.security;
+package com.product.api.gitmarket.infra.security;
 
-import com.product.api.crud_produtos.domain.usuario.UsuarioRepository;
+import com.product.api.gitmarket.domain.usuario.UsuarioRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -35,8 +35,7 @@ public class SecurityFilter extends OncePerRequestFilter {
             if (usuario != null) {
                 var authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
-            }
-            else{
+            } else {
                 System.out.println("ALERTA: Token válido, mas usuário não encontrado no banco: " + subject);
             }
         }

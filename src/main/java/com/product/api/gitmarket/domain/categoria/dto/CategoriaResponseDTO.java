@@ -1,7 +1,7 @@
-package com.product.api.crud_produtos.domain.categoria.dto;
+package com.product.api.gitmarket.domain.categoria.dto;
 
 
-import com.product.api.crud_produtos.domain.categoria.Categoria;
+import com.product.api.gitmarket.domain.categoria.Categoria;
 
 import java.util.UUID;
 

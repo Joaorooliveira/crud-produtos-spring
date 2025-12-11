@@ -1,4 +1,4 @@
-package com.product.api.crud_produtos;
+package com.product.api.gitmarket;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

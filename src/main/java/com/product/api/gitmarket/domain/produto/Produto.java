@@ -1,7 +1,7 @@
-package com.product.api.crud_produtos.domain.produto;
+package com.product.api.gitmarket.domain.produto;
 
 
-import com.product.api.crud_produtos.domain.categoria.Categoria;
+import com.product.api.gitmarket.domain.categoria.Categoria;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
