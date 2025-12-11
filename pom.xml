@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.product.api</groupId>
-    <artifactId>crud-produtos</artifactId>
+    <artifactId>gitmarket</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>crud-produtos</name>
-    <description>E-ecomerce API REST</description>
+    <name>GitMarket</name>
+    <description>GitMarket E-ecomerce API REST</description>
     <url/>
     <licenses>
         <license/>

@@ -21,7 +21,7 @@ public class SpringDocConfiguration {
                                         .scheme("bearer")
                                         .bearerFormat("JWT")))
                 .info(new Info()
-                        .title("E-commerce")
+                        .title("GitMarket API")
                         .description("API Rest da aplicação E-commerce contendo as funcionalidades de CRUD de Produtos, Usuarios e Carrinho de compras")
                         .contact(new Contact()
                                 .name("Time Backend")
